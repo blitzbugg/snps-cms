@@ -1,34 +1,148 @@
-import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { buildConfig } from 'payload'
-import { fileURLToPath } from 'url'
-import sharp from 'sharp'
+import { buildConfig } from "payload";
+import path from "path";
+import { fileURLToPath } from "url";
+import { postgresAdapter } from '@payloadcms/db-postgres';
+import { Announcements } from "./collections/Announcements";
+import { Users } from "./collections/Users";
+import Labs from "./collections/Labs";
+import Disclosure from "./collections/Disclosures";
+import { Gallery } from "./collections/Gallery";
+import { Media } from "./collections/Media";
+import { Leaders } from "./collections/Leaders";
+import Admissions from "./collections/Admissions";
+import Contacts from "./collections/Contacts";
+import { Events } from "./collections/Events";
+import Management from "./collections/Management";
+import { Images } from "./collections/Excellence";
+import BusTables from "./collections/BusTables";
+import ExecutiveCommittee from "./collections/ExecutiveCommittee";
+import PTA from "./collections/PTA";
+import Institution from "./collections/Institutions";
+import { importExportPlugin } from '@payloadcms/plugin-import-export';
+import PTAGroupPhoto from "./collections/PTAGroupPhoto";
+import Objective from "./collections/Objective";
+import Mission from "./collections/Mission";
+import TC from "./collections/TC";
+import {Achievements} from "./collections/Achievements";
+import Primary from "./collections/Primary";
+import { Sports } from "./collections/Sports";
+import { Playground } from "./collections/Playground";
+import { Conferencehall } from "./collections/Conferencehall";
+import { Auditorium } from "./collections/Auditorium";
+import { Atl } from "./collections/Atl";
+import { Library } from "./collections/Library";
+import { Smartclass } from "./collections/Smartclass";
+import { Preprimary } from "./collections/Preprimary";
+import { Secondary } from "./collections/Secondary";
+import { SeniorSecondary } from "./collections/SeniorSecondary";
+import { YearPlanandCalender } from "./collections/YearPlanandCalender";
+import { Result } from "./collections/Result";
+import { Clubs } from "./collections/Clubs";
+import { Department } from "./collections/Department";
+import Fees from "./collections/Fees";  
+import Textbook from "./collections/Textbook";
+import Appendix from "./collections/Appendix";
+import { Assembly } from "./collections/Assembly";
+import NewsLetter from "./collections/NewsLetter";
+import StaffSummary from "./collections/StaffSummary";
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default buildConfig({
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || "http://localhost:3000",
   admin: {
     user: Users.slug,
-    importMap: {
-      baseDir: path.resolve(dirname),
-    },
   },
-  collections: [Users, Media],
-  editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
+  cors: [
+    "http://168.231.103.26:3000", // CMS itself
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://www.sbcs.edu.in", // Frontend application
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:3001",
+    "https://admin.sbcs.edu.in" // Production admin URL
+  ],
+  csrf: [
+    "http://168.231.103.26:3000",
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://www.sbcs.edu.in",
+    "http://localhost:3001",
+    "https://admin.sbcs.edu.in" // Production admin URL
+  ],
+
+  collections: [
+    Users,
+    Objective,
+    Labs,
+    Primary,
+    Department,
+    Events,
+    Disclosure,
+    Management,
+    ExecutiveCommittee,
+    Institution,
+    Leaders,
+    Mission,
+    PTA,
+    PTAGroupPhoto,
+    TC,
+    Gallery,
+    Achievements,
+    Images,
+    Media,
+    Announcements,
+    BusTables,
+    Admissions,
+    Contacts,
+    Sports,
+    Playground,
+    Conferencehall,
+    Auditorium,
+    Atl,
+    Library,
+    Smartclass,
+    Preprimary,
+    Secondary,
+    SeniorSecondary,
+    YearPlanandCalender,   
+    Result,
+    Fees,
+    Appendix,
+    Assembly,
+    NewsLetter,
+    StaffSummary,
+    Textbook,
+    Clubs,
+  ],
+  
+  // Add the import-export plugin with additional config to help with compatibility
+  plugins: [
+    importExportPlugin({
+  collections: [
+    {
+      slug: 'admissions',
+      export: {
+        disableJobsQueue: true,
+      },
+      import: {
+        disableJobsQueue: true,
+      },
+    },
+  ],
+  debug: false,
+})
+  ],
+  
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URL || '',
+      connectionString: process.env.DATABASE_URL || "postgres://username:password@localhost:5432/schoolcms",
     },
   }),
-  sharp,
-  plugins: [],
-})
+  secret: process.env.PAYLOAD_SECRET || "super-secret-key"
+}); // <- Added missing closing parenthesis and semicolon
