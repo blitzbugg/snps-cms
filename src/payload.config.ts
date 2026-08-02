@@ -51,26 +51,24 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default buildConfig({
-  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || "http://localhost:3000",
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || "https://www.admin.snpskizhavoor.org",
   admin: {
     user: Users.slug,
   },
   cors: [
-    "http://168.231.103.26:3000", // CMS itself
     "http://localhost:3000",
     "http://localhost:3001",
-    "https://www.sbcs.edu.in", // Frontend application
+    "https://www.snpskizhavoor.org", // Frontend application
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
-    "https://admin.sbcs.edu.in" // Production admin URL
+    "https://admin.snpskizhavoor.org" // Production admin URL
   ],
   csrf: [
-    "http://168.231.103.26:3000",
     "http://localhost:3000",
     "http://localhost:3001",
-    "https://www.sbcs.edu.in",
+    "https://www.snpskizhavoor.org", // Frontend application
     "http://localhost:3001",
-    "https://admin.sbcs.edu.in" // Production admin URL
+    "https://admin.snpskizhavoor.org" // Production admin URL
   ],
 
   collections: [
