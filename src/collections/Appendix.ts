@@ -33,6 +33,7 @@ const Appendix: CollectionConfig = {
         { label: 'C: Result and Academics', value: 'academics' },
         { label: 'D: Staff (Teaching)', value: 'staff' },
         { label: 'E: School Infrastructure', value: 'infrastructure' },
+        { label: 'F: Teacher Details', value: 'teacher_details' }, // NEW SECTION
         { label: 'Result Class X', value: 'result_x' },
         { label: 'Result Class XII', value: 'result_xii' },
       ],
@@ -65,12 +66,12 @@ const Appendix: CollectionConfig = {
       },
     },
 
-    // CONDITIONAL: DETAILS FIELD (for General Info, Staff, Infrastructure)
+    // CONDITIONAL: DETAILS FIELD (for General Info, Staff, Infrastructure, Teacher Details)
     {
       name: 'details',
       type: 'textarea',
       admin: {
-        condition: (data) => ['general', 'staff', 'infrastructure'].includes(data.section),
+        condition: (data) => ['general', 'staff', 'infrastructure', 'teacher_details'].includes(data?.section),
         description: 'The value/details for this information field',
       },
     },
@@ -81,7 +82,7 @@ const Appendix: CollectionConfig = {
       type: 'upload',
       relationTo: 'media',
       admin: {
-        condition: (data) => ['documents', 'academics'].includes(data.section),
+        condition: (data) => ['documents', 'academics'].includes(data?.section),
         description: 'Upload the PDF document',
       },
     },
@@ -89,19 +90,17 @@ const Appendix: CollectionConfig = {
       name: 'documentUrl',
       type: 'text',
       admin: {
-        condition: (data) => ['documents', 'academics'].includes(data.section),
+        condition: (data) => ['documents', 'academics'].includes(data?.section),
         description: 'External document URL (alternative to upload, e.g., Google Drive link)',
       },
     },
-
-    // CONDITIONAL: STAFF DETAILS (for Staff section - Section D)
 
     // CONDITIONAL: RESULT DATA (for Class X & XII results)
     {
       name: 'resultData',
       type: 'group',
       admin: {
-        condition: (data) => ['result_x', 'result_xii'].includes(data.section),
+        condition: (data) => ['result_x', 'result_xii'].includes(data?.section),
         description: 'Board examination results',
       },
       fields: [
@@ -160,7 +159,7 @@ const Appendix: CollectionConfig = {
         if (data?.resultData?.registered && data?.resultData?.passed) {
           if (!data.resultData.passPercentage || data.resultData.passPercentage === 0) {
             const percentage = (data.resultData.passed / data.resultData.registered) * 100;
-            data.resultData.passPercentage = Math.round(percentage * 100) / 100; // Round to 2 decimals
+            data.resultData.passPercentage = Math.round(percentage * 100) / 100;
           }
         }
 

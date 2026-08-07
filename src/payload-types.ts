@@ -1100,7 +1100,8 @@ export interface Appendix {
   /**
    * Select the appendix section this entry belongs to
    */
-  section: 'general' | 'documents' | 'academics' | 'staff' | 'infrastructure' | 'result_x' | 'result_xii';
+  section:
+    'general' | 'documents' | 'academics' | 'staff' | 'infrastructure' | 'teacher_details' | 'result_x' | 'result_xii';
   /**
    * SL NO from the appendix table (for ordering)
    */
