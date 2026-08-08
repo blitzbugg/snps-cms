@@ -22,5 +22,6 @@ export const Achievements: CollectionConfig = {
     { name: "title", type: "text", required: true },
     { name: "content", type: "textarea", required: true },
     { name: "publishDate", type: "date", admin: { date: {displayFormat: 'dd-MM-yyyy'}}}, 
+    { name: "image", type: "upload", relationTo: "media" },
   ],
 };

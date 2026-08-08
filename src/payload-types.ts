@@ -639,6 +639,7 @@ export interface Achievement {
   title: string;
   content: string;
   publishDate?: string | null;
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -1922,6 +1923,7 @@ export interface AchievementsSelect<T extends boolean = true> {
   title?: T;
   content?: T;
   publishDate?: T;
+  image?: T;
   updatedAt?: T;
   createdAt?: T;
 }
