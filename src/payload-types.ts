@@ -453,10 +453,9 @@ export interface Disclosure {
 export interface Management {
   id: number;
   name: string;
-  designation:
-    'principal' | 'chairman' | 'secretary' | 'joint-secretary' | 'treasurer' | 'vice-president' | 'president';
+  designation: string;
   /**
-   * Display order (1-7)
+   * Display order (lower numbers appear first)
    */
   order: number;
   image?: (number | null) | Media;
