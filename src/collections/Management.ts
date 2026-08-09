@@ -22,10 +22,14 @@ export const Management: CollectionConfig = {
       type: 'select',
       required: true,
       options: [
+        { label: 'Principal', value: 'principal' },
         { label: 'Chairman', value: 'chairman' },
         { label: 'Secretary', value: 'secretary' },
         { label: 'Joint Secretary', value: 'joint-secretary' },
         { label: 'Treasurer', value: 'treasurer' },
+        { label: 'Vice President', value: 'vice-president' },
+        { label: 'President', value: 'president' },
+        
       ],
     },
     {
@@ -33,16 +37,16 @@ export const Management: CollectionConfig = {
       type: 'number',
       required: true,
       admin: {
-        description: 'Display order (1-4)',
+        description: 'Display order (1-7)',
       },
       min: 1,
-      max: 4,
+      max: 7,
     },
     {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+      required: false,
     },
   ],
 };

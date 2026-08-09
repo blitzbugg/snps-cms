@@ -34,7 +34,7 @@ export const ExecutiveCommittee: CollectionConfig = {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+      required: false,
     },
   ],
 };

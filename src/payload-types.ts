@@ -453,12 +453,13 @@ export interface Disclosure {
 export interface Management {
   id: number;
   name: string;
-  designation: 'chairman' | 'secretary' | 'joint-secretary' | 'treasurer';
+  designation:
+    'principal' | 'chairman' | 'secretary' | 'joint-secretary' | 'treasurer' | 'vice-president' | 'president';
   /**
-   * Display order (1-4)
+   * Display order (1-7)
    */
   order: number;
-  image: number | Media;
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -474,7 +475,7 @@ export interface ExecutiveCommittee {
    * Display order
    */
   order: number;
-  image: number | Media;
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
